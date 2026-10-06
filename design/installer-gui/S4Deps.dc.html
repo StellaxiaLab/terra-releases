@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Terra 설치기 — S4 의존성</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&amp;family=Noto+Sans+KR:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Noto Sans KR',system-ui,sans-serif;background:#07090c;color:#ede9e1}
+*{box-sizing:border-box}
+.win{width:960px;height:640px;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(800px 420px at 90% -15%,rgba(90,168,255,.10),transparent 60%),radial-gradient(700px 400px at -5% 115%,rgba(240,166,58,.08),transparent 60%),#07090c}
+.hd{height:52px;flex:none;display:flex;align-items:center;gap:12px;padding:0 28px;border-bottom:1px solid rgba(255,255,255,.10);background:rgba(13,15,19,.82)}
+.wm{font-size:13px;font-weight:600;letter-spacing:.42em}
+.cap{font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#9aa1ab}
+.mono{font-family:'JetBrains Mono',ui-monospace,Consolas,monospace}
+.chip{display:inline-flex;align-items:center;gap:5px;height:20px;padding:0 9px;border-radius:10px;font-size:11px;font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,255,255,.18);color:#b4bac3;background:rgba(255,255,255,.05);white-space:nowrap}
+.ok{color:#3ecf8e;border-color:rgba(62,207,142,.5);background:rgba(62,207,142,.10)}
+.wn{color:#f5b83d;border-color:rgba(245,184,61,.5);background:rgba(245,184,61,.10)}
+.stp{height:44px;flex:none;display:flex;align-items:center;padding:0 28px;border-bottom:1px solid rgba(255,255,255,.07)}
+.s{display:flex;align-items:center;gap:7px;flex:1;font-size:12px;color:#8b929d;white-space:nowrap}
+.s:not(:last-child)::after{content:'';flex:1;height:1px;margin:0 8px;min-width:8px;background:rgba(255,255,255,.12)}
+.s i{width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font:500 10px 'JetBrains Mono',monospace;font-style:normal;flex:none}
+.s.on{color:#ede9e1;font-weight:600}
+.s.on i{border-color:#ede9e1;box-shadow:0 0 0 3px rgba(237,233,225,.12)}
+.s.done{color:#b4bac3}
+.s.done i{background:#3ecf8e;border-color:#3ecf8e;font-size:0}
+.s.done i::before{content:'';width:4px;height:8px;border:solid #07090c;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.bd{flex:1;min-height:0;padding:18px 40px 0;display:flex;flex-direction:column}
+.ft{height:60px;flex:none;display:flex;align-items:center;gap:10px;padding:0 40px;border-top:1px solid rgba(255,255,255,.10);background:rgba(13,15,19,.82)}
+.btn{height:38px;padding:0 20px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:#ede9e1;font:600 13px 'Noto Sans KR',sans-serif;cursor:pointer}
+.btn:hover{background:rgba(255,255,255,.09)}
+.btn.pri{background:#ede9e1;color:#111;border-color:#ede9e1}
+.pnl{border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(13,15,19,.82);box-shadow:0 10px 30px rgba(0,0,0,.30)}
+h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
+.sub{margin:0;font-size:13px;line-height:1.6;color:#b4bac3}
+.hint{font-size:12px;line-height:1.5;color:#9aa1ab}
+.seg{display:flex;border:1px solid rgba(255,255,255,.18);border-radius:10px;overflow:hidden;background:#0e1013;width:176px;flex:none}
+.seg span{flex:1;height:34px;display:flex;align-items:center;justify-content:center;font-size:12.5px;color:#b4bac3;border-right:1px solid rgba(255,255,255,.10)}
+.seg span:last-child{border-right:0}
+.seg span.sel{background:#ede9e1;color:#111;font-weight:700}
+.dep{display:flex;gap:16px;align-items:flex-start;padding:14px 18px}
+.cmd{margin-top:8px;padding:8px 12px;border-radius:9px;background:#0b0d10;border:1px solid rgba(255,255,255,.08);font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#b4bac3;word-break:break-all}
+
+.win{display:grid;grid-template-columns:168px minmax(0,1fr);grid-template-rows:52px minmax(0,1fr) 60px}
+.hd{grid-column:1/3;grid-row:1}
+.stp{grid-column:1;grid-row:2/4;height:auto;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:22px 20px;border-bottom:0;border-right:1px solid rgba(255,255,255,.10);background:rgba(13,15,19,.5)}
+.stp::before{content:'진행 상황';font-size:10px;font-weight:600;letter-spacing:.28em;color:#9aa1ab;margin-bottom:16px}
+.s{flex:none;width:100%;height:44px;align-items:flex-start;position:relative;font-size:13px;line-height:18px}
+.s:not(:last-child)::after{content:'';position:absolute;left:8px;top:24px;bottom:2px;width:1px;height:auto;min-width:0;margin:0;flex:none;background:rgba(255,255,255,.14)}
+.s.done:not(:last-child)::after{background:rgba(62,207,142,.55)}
+.bd{grid-column:2;grid-row:2;padding:18px 32px 0;overflow:hidden}
+.ft{grid-column:2;grid-row:3;padding:0 32px}
+/*stp-left*/
+.pnl,.card,.inp,.seg,.chip,.btn,.alert,.cmd,.note,.sg{border:0!important}
+.seg button,.seg span,.sg button{border:0!important}
+[style*="border:1px solid"]{border:0!important}
+.pnl,.card{background:rgba(255,255,255,.045)!important}
+.btn{background:rgba(255,255,255,.09)}
+.btn:hover{background:rgba(255,255,255,.15)}
+.btn.pri{background:#ede9e1}
+.btn.dg{background:rgba(255,93,93,.12)}
+.inp,.cmd,.seg,.sg{background:rgba(0,0,0,.35)}
+.seg button.sel,.seg span.sel,.sg button[aria-pressed=true]{background:#ede9e1}
+.chip{background-clip:padding-box}
+/*noborder*/</style>
+</helmet>
+<div class="win">
+  <div class="hd">
+    <img src="/_blob/e73e951b60dbbe231a3619cceb4a3087" alt="" style="width:24px;height:24px">
+    <span class="wm">TERRA</span><span class="cap" style="margin-left:4px">설치기</span>
+    <span style="margin-left:auto"></span>
+    <span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
+  </div>
+  <div class="stp">
+    <div class="s done"><i>1</i>역할</div><div class="s done"><i>2</i>연결</div><div class="s done"><i>3</i>모듈</div><div class="s on"><i>4</i>의존성</div><div class="s"><i>5</i>옵션</div><div class="s"><i>6</i>요약</div><div class="s"><i>7</i>설치</div><div class="s"><i>8</i>완료</div>
+  </div>
+  <div class="bd">
+    <h1>함께 필요한 도구를 확인했어요</h1>
+    <p class="sub">없는 도구는 설치 계획을 보고 하나씩 승인하세요. 건너뛰면 해당 기능만 꺼집니다.</p>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+      <div class="pnl dep">
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:700">WireGuard</span><span class="mono" style="font-size:11px;color:#9aa1ab">wireguard-tools</span><span class="chip wn">없음</span><span class="chip wn">관리자 권한 필요</span></div>
+          <div class="cmd">sudo apt-get install -y wireguard-tools</div>
+          <div class="hint" style="margin-top:6px">건너뛰면 노드 사이 WireGuard 연결이 꺼져요.</div>
+        </div>
+        <div class="seg"><span class="sel">승인</span><span>건너뛰기</span></div>
+      </div>
+      <div class="pnl dep">
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:700">Docker</span><span class="mono" style="font-size:11px;color:#9aa1ab">docker.io</span><span class="chip wn">없음</span><span class="chip wn">관리자 권한 필요</span></div>
+          <div class="cmd">sudo apt-get install -y docker.io</div>
+          <div class="hint" style="margin-top:6px">건너뛰면 fleet-host를 쓸 수 없어요. Master가 이 노드에 놓은 컨테이너 좌석을 돌리지 못합니다.</div>
+        </div>
+        <div class="seg"><span>승인</span><span class="sel">건너뛰기</span></div>
+      </div>
+      <div class="pnl dep">
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:700">OpenSSH 서버</span><span class="mono" style="font-size:11px;color:#9aa1ab">openssh-server</span><span class="chip ok">있음</span><span class="chip">9.6</span></div>
+          <div class="hint" style="margin-top:8px">이미 설치돼 있어서 할 일이 없어요. ssh-server 옵션을 켠 경우에만 쓰입니다.</div>
+        </div>
+        <div class="seg" style="opacity:.4"><span class="sel">승인</span><span>건너뛰기</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft">
+    <button class="btn">취소</button>
+    <span style="display:flex;align-items:center;gap:8px;margin-left:8px">
+      <svg viewBox="0 0 24 24" width="15" height="15" style="color:#f5b83d;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>
+      <span class="hint">승인한 항목 중 1개가 sudo를 사용해요</span>
+    </span>
+    <span style="margin-left:auto"></span>
+    <button class="btn">이전</button>
+    <button class="btn pri" style="padding:0 28px">다음</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":960,"height":640}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Terra 설치기 — S2 연결</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&amp;family=Noto+Sans+KR:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Noto Sans KR',system-ui,sans-serif;background:#07090c;color:#ede9e1}
+*{box-sizing:border-box}
+.win{width:960px;height:640px;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(800px 420px at 90% -15%,rgba(90,168,255,.10),transparent 60%),radial-gradient(700px 400px at -5% 115%,rgba(240,166,58,.08),transparent 60%),#07090c}
+.hd{height:52px;flex:none;display:flex;align-items:center;gap:12px;padding:0 28px;border-bottom:1px solid rgba(255,255,255,.10);background:rgba(13,15,19,.82)}
+.wm{font-size:13px;font-weight:600;letter-spacing:.42em}
+.cap{font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#9aa1ab}
+.mono{font-family:'JetBrains Mono',ui-monospace,Consolas,monospace}
+.chip{display:inline-flex;align-items:center;gap:5px;height:20px;padding:0 9px;border-radius:10px;font-size:11px;font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,255,255,.18);color:#b4bac3;background:rgba(255,255,255,.05);white-space:nowrap}
+.ok{color:#3ecf8e;border-color:rgba(62,207,142,.5);background:rgba(62,207,142,.10)}
+.lf{color:#5aa8ff;border-color:rgba(90,168,255,.5);background:rgba(90,168,255,.10)}
+.stp{height:44px;flex:none;display:flex;align-items:center;padding:0 28px;border-bottom:1px solid rgba(255,255,255,.07)}
+.s{display:flex;align-items:center;gap:7px;flex:1;font-size:12px;color:#8b929d;white-space:nowrap}
+.s:not(:last-child)::after{content:'';flex:1;height:1px;margin:0 8px;min-width:8px;background:rgba(255,255,255,.12)}
+.s i{width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font:500 10px 'JetBrains Mono',monospace;font-style:normal;flex:none}
+.s.on{color:#ede9e1;font-weight:600}
+.s.on i{border-color:#ede9e1;box-shadow:0 0 0 3px rgba(237,233,225,.12)}
+.s.done{color:#b4bac3}
+.s.done i{background:#3ecf8e;border-color:#3ecf8e;font-size:0}
+.s.done i::before{content:'';width:4px;height:8px;border:solid #07090c;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.bd{flex:1;min-height:0;padding:20px 40px 0;display:flex;flex-direction:column}
+.ft{height:60px;flex:none;display:flex;align-items:center;gap:10px;padding:0 40px;border-top:1px solid rgba(255,255,255,.10);background:rgba(13,15,19,.82)}
+.btn{height:38px;padding:0 20px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:#ede9e1;font:600 13px 'Noto Sans KR',sans-serif;cursor:pointer}
+.btn:hover{background:rgba(255,255,255,.09)}
+.btn.pri{background:#ede9e1;color:#111;border-color:#ede9e1}
+.pnl{border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(13,15,19,.82);box-shadow:0 10px 30px rgba(0,0,0,.30)}
+h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
+.sub{margin:0;font-size:13px;line-height:1.6;color:#b4bac3}
+.hint{font-size:12px;line-height:1.5;color:#9aa1ab}
+.lbl{font-size:12px;font-weight:500;color:#b4bac3}
+.fld{display:flex;flex-direction:column;gap:6px;min-width:0}
+.inp{height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0e1013;display:flex;align-items:center;gap:10px;padding:0 14px;font-size:13.5px;min-width:0}
+.inp.f{border-color:#ede9e1;box-shadow:0 0 0 4px rgba(237,233,225,.12)}
+.seg{display:flex;border:1px solid rgba(255,255,255,.18);border-radius:10px;overflow:hidden;background:#0e1013}
+.seg button{flex:1;height:38px;border:0;border-right:1px solid rgba(255,255,255,.10);background:transparent;color:#b4bac3;font:500 13px 'Noto Sans KR',sans-serif;cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button.sel{background:#ede9e1;color:#111;font-weight:700}
+.seg button.dim{opacity:.55}
+.note{display:flex;gap:10px;align-items:flex-start;padding:11px 14px;border-radius:12px;font-size:12.5px;line-height:1.55}
+
+.win{display:grid;grid-template-columns:168px minmax(0,1fr);grid-template-rows:52px minmax(0,1fr) 60px}
+.hd{grid-column:1/3;grid-row:1}
+.stp{grid-column:1;grid-row:2/4;height:auto;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:22px 20px;border-bottom:0;border-right:1px solid rgba(255,255,255,.10);background:rgba(13,15,19,.5)}
+.stp::before{content:'진행 상황';font-size:10px;font-weight:600;letter-spacing:.28em;color:#9aa1ab;margin-bottom:16px}
+.s{flex:none;width:100%;height:44px;align-items:flex-start;position:relative;font-size:13px;line-height:18px}
+.s:not(:last-child)::after{content:'';position:absolute;left:8px;top:24px;bottom:2px;width:1px;height:auto;min-width:0;margin:0;flex:none;background:rgba(255,255,255,.14)}
+.s.done:not(:last-child)::after{background:rgba(62,207,142,.55)}
+.bd{grid-column:2;grid-row:2;padding:18px 32px 0;overflow:hidden}
+.ft{grid-column:2;grid-row:3;padding:0 32px}
+/*stp-left*/
+.pnl,.card,.inp,.seg,.chip,.btn,.alert,.cmd,.note,.sg{border:0!important}
+.seg button,.seg span,.sg button{border:0!important}
+[style*="border:1px solid"]{border:0!important}
+.pnl,.card{background:rgba(255,255,255,.045)!important}
+.btn{background:rgba(255,255,255,.09)}
+.btn:hover{background:rgba(255,255,255,.15)}
+.btn.pri{background:#ede9e1}
+.btn.dg{background:rgba(255,93,93,.12)}
+.inp,.cmd,.seg,.sg{background:rgba(0,0,0,.35)}
+.seg button.sel,.seg span.sel,.sg button[aria-pressed=true]{background:#ede9e1}
+.chip{background-clip:padding-box}
+/*noborder*/</style>
+</helmet>
+<div class="win">
+  <div class="hd">
+    <img src="/_blob/e73e951b60dbbe231a3619cceb4a3087" alt="" style="width:24px;height:24px">
+    <span class="wm">TERRA</span><span class="cap" style="margin-left:4px">설치기</span>
+    <span style="margin-left:auto"></span>
+    <span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
+  </div>
+  <div class="stp">
+    <div class="s done"><i>1</i>역할</div><div class="s on"><i>2</i>연결</div><div class="s"><i>3</i>모듈</div><div class="s"><i>4</i>의존성</div><div class="s"><i>5</i>옵션</div><div class="s"><i>6</i>요약</div><div class="s"><i>7</i>설치</div><div class="s"><i>8</i>완료</div>
+  </div>
+  <div class="bd">
+    <div style="display:flex;align-items:flex-start;gap:12px">
+      <div style="flex:1;min-width:0"><h1>어느 Tree에 붙을까요?</h1><p class="sub">이 컴퓨터를 기존 Tree의 노드로 등록해요.</p></div>
+      <span class="chip lf" style="margin-top:8px">Leaf</span>
+    </div>
+
+    <div class="seg" style="margin-top:16px">
+      <button class="{{auto.cls}}" onClick="{{auto.pick}}">자동 연결</button>
+      <button class="{{account.cls}}" onClick="{{account.pick}}">계정</button>
+      <button class="{{token.cls}}" onClick="{{token.pick}}">토큰</button>
+      <button class="{{none.cls}}" onClick="{{none.pick}}">나중에 등록</button>
+    </div>
+
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:14px">
+      <sc-if value="{{auto.on}}" hint-placeholder-val="{{ false }}">
+        <div class="note" style="border:1px solid rgba(245,184,61,.35);background:rgba(245,184,61,.07);color:#d9c9a3">
+          <svg viewBox="0 0 24 24" width="17" height="17" style="flex:none;margin-top:1px;color:#f5b83d;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/></svg>
+          <span>이 컴퓨터에서 Tree를 찾지 못했어요. Tree도 함께 설치하면 자동으로 연결됩니다. 다른 컴퓨터의 Tree에 붙으려면 '계정'이나 '토큰'을 고르세요.</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{account.on}}" hint-placeholder-val="{{ true }}">
+        <div class="fld">
+          <span class="lbl">Tree 주소</span>
+          <div style="display:flex;gap:10px"><div class="inp f" style="flex:1"><span class="mono">http://127.0.0.1:8080</span><span style="width:1px;height:17px;background:#ede9e1"></span></div><button class="btn">연결 확인</button></div>
+        </div>
+        <div class="note" style="border:1px solid rgba(245,184,61,.35);background:rgba(245,184,61,.07);color:#d9c9a3">
+          <svg viewBox="0 0 24 24" width="17" height="17" style="flex:none;margin-top:1px;color:#f5b83d;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/></svg>
+          <span>이 주소는 이 컴퓨터 자신입니다. 다른 컴퓨터의 Tree에 붙으려면 그 Tree의 주소로 바꾸세요.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px">
+          <div class="fld"><span class="lbl">관리자 이메일</span><div class="inp"><span class="mono" style="color:#8b929d">name@example.com</span></div></div>
+          <div class="fld"><span class="lbl">암호</span><div class="inp" style="justify-content:space-between"><span class="mono" style="letter-spacing:.2em">••••••••••</span><span class="hint">가림</span></div></div>
+        </div>
+        <span class="hint">암호는 이 화면 밖에 저장하지 않고, 주소·로그·진행 기록에도 남기지 않아요.</span>
+      </sc-if>
+
+      <sc-if value="{{token.on}}" hint-placeholder-val="{{ false }}">
+        <div class="fld">
+          <span class="lbl">Tree 주소</span>
+          <div style="display:flex;gap:10px"><div class="inp f" style="flex:1"><span class="mono" style="color:#8b929d">https://tree.example.net:8080</span></div><button class="btn">연결 확인</button></div>
+        </div>
+        <div class="fld"><span class="lbl">토큰</span><div class="inp" style="justify-content:space-between"><span class="mono" style="letter-spacing:.2em">••••••••••••••••••••</span><span class="hint">가림</span></div></div>
+        <span class="hint">토큰은 Tree 관리자에게 받은 값이에요. 화면 밖에 저장하지 않습니다.</span>
+      </sc-if>
+
+      <sc-if value="{{none.on}}" hint-placeholder-val="{{ false }}">
+        <div class="note" style="border:1px solid rgba(122,167,255,.35);background:rgba(122,167,255,.07);color:#c3d3f3">
+          <svg viewBox="0 0 24 24" width="17" height="17" style="flex:none;margin-top:1px;color:#7aa7ff;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg>
+          <span>등록 전에는 이 컴퓨터의 브라우저에서 할 수 있는 일이 없습니다. 등록은 설치 뒤 열리는 화면에서 등록 코드로 해요.</span>
+        </div>
+        <span class="hint">명령줄로는 설치 직후부터 <span class="mono" style="color:#b4bac3">terra daemon …</span>을 쓸 수 있어요.</span>
+      </sc-if>
+    </div>
+  </div>
+  <div class="ft">
+    <button class="btn">취소</button>
+    <span style="margin-left:auto"></span>
+    <button class="btn">이전</button>
+    <button class="btn pri" style="padding:0 28px">다음</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":960,"height":640}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { mode: 'account' };
+  }
+  renderVals() {
+    const cur = this.state.mode;
+    const mk = (id, dim) => ({
+      on: cur === id,
+      cls: (cur === id ? 'sel' : '') + (dim ? ' dim' : ''),
+      pick: () => this.setState({ mode: id })
+    });
+    return { auto: mk('auto', true), account: mk('account'), token: mk('token'), none: mk('none') };
+  }
+}
+</script>
+</body>
+</html>
