@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>Terra 설치기 — S8 완료</title>
+<title>Terra 설치기 — V6 옛 버전 목록 거부</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -76,6 +76,24 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 .seg button.sel,.seg span.sel,.sg button[aria-pressed=true]{background:#ede9e1}
 .chip{background-clip:padding-box}
 /*noborder*/
+.btn.dg{border-color:rgba(255,93,93,.5);color:#ff9a9a}
+.bad{color:#ff5d5d;border-color:rgba(255,93,93,.5);background:rgba(255,93,93,.10)}
+.tr{color:#f0a63a;border-color:rgba(240,166,58,.5);background:rgba(240,166,58,.10)}
+.lf{color:#5aa8ff;border-color:rgba(90,168,255,.5);background:rgba(90,168,255,.10)}
+.info{color:#7aa7ff;border-color:rgba(122,167,255,.5);background:rgba(122,167,255,.10)}
+.crumb{height:44px;flex:none;display:flex;align-items:center;gap:8px;padding:0 28px;border-bottom:1px solid rgba(255,255,255,.07);font-size:12px;color:#9aa1ab}
+.crumb b{color:#ede9e1;font-weight:600}
+.alert{display:flex;gap:10px;padding:10px 14px;border-radius:10px;font-size:12.5px;line-height:1.55}
+.alert.w{border:1px solid rgba(245,184,61,.4);background:rgba(245,184,61,.07);color:#e6d39f}
+.alert.b{border:1px solid rgba(255,93,93,.4);background:rgba(255,93,93,.07);color:#f0b9b9}
+.alert.i{border:1px solid rgba(122,167,255,.4);background:rgba(122,167,255,.07);color:#c3d4f5}
+.alert svg{flex:none;margin-top:1px}
+.tb{display:grid;align-items:center;gap:10px;padding:9px 16px;border-top:1px solid rgba(255,255,255,.07);font-size:12.5px}
+.tb.h{border-top:0;font-size:11px;color:#9aa1ab}
+.ck{width:18px;height:18px;border-radius:5px;border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;flex:none}
+.ck.on{background:#ede9e1;border-color:#ede9e1}
+.cmd{padding:8px 12px;border-radius:9px;background:#0b0d10;border:1px solid rgba(255,255,255,.08);font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#b4bac3;line-height:1.6}
+
 :focus-visible{outline:2px solid #7aa7ff!important;outline-offset:2px}
 .btn.pri:focus-visible,.seg button.sel:focus-visible,.sg button[aria-pressed=true]:focus-visible{outline-color:#7aa7ff;outline-offset:3px}
 .card[aria-pressed=true],.act[aria-pressed=true]{box-shadow:inset 0 0 0 2px rgba(237,233,225,.6)!important}
@@ -92,70 +110,21 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
     <span style="margin-left:auto"></span>
     <span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
   </div>
-  <div class="stp">
-    <div class="s done"><i>1</i>역할</div><div class="s done"><i>2</i>연결</div><div class="s done"><i>3</i>모듈</div><div class="s done"><i>4</i>의존성</div><div class="s done"><i>5</i>옵션</div><div class="s done"><i>6</i>요약</div><div class="s done"><i>7</i>설치</div><div class="s done"><i>8</i>완료</div>
-  <span class="cnt">8 / 8</span></div>
-  <div class="bd">
-    <div style="display:flex;align-items:center;gap:10px">
-      <span style="width:30px;height:30px;border-radius:50%;background:#3ecf8e;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="18" height="18" style="fill:none;stroke:#07090c;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5 9-10"/></svg></span>
-      <h1 style="margin:0">{{title}}</h1>
-      <span style="margin-left:auto" class="sg" role="group" aria-label="상황 미리보기">
-        <button aria-pressed="{{p0}}" onClick="{{go0}}">Tree 설치</button><button aria-pressed="{{p1}}" onClick="{{go1}}">Leaf 등록됨</button><button aria-pressed="{{p2}}" onClick="{{go2}}">Leaf 등록 안 함</button><button aria-pressed="{{p3}}" onClick="{{go3}}">등록 지연</button>
-      </span>
-    </div>
-    <p class="sub" style="margin-top:8px">{{lead}}</p>
-
-    <div style="display:flex;gap:14px;margin-top:14px;min-height:0">
-      <div class="pnl" style="flex:1.2;min-width:0;padding:16px 20px">
-        <span class="cap">다음 한 걸음</span>
-        <div style="margin-top:8px;font-size:16px;font-weight:700;line-height:1.45">{{stepTitle}}</div>
-        <div class="sub" style="margin-top:6px">{{stepBody}}</div>
-        <sc-if value="{{showAddr}}" hint-placeholder-val="{{ true }}">
-          <div style="margin-top:12px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0e1013;display:flex;align-items:center;padding:0 14px"><span class="mono" style="font-size:12.5px">http://127.0.0.1:8080</span><span class="hint" style="margin-left:auto">이 컴퓨터에서만 열려요</span></div>
-        </sc-if>
-        <sc-if value="{{showWarn}}" hint-placeholder-val="{{ false }}">
-          <div style="margin-top:12px;display:flex;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid rgba(245,184,61,.4);background:rgba(245,184,61,.07);color:#e6d39f;font-size:12px;line-height:1.55">
-            <svg viewBox="0 0 24 24" width="16" height="16" style="flex:none;margin-top:1px;color:#f5b83d;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/></svg>
-            <span>{{warn}}</span>
-          </div>
-        </sc-if>
-      </div>
-      <div class="pnl" style="flex:1;min-width:0;padding:14px 20px 8px">
-        <span class="cap">설치 결과</span>
-        <div class="kv" style="margin-top:6px;border-top:0"><span>버전</span><span class="mono" style="font-size:12px">0.6.0</span></div>
-        <div class="kv"><span>역할</span><span>{{roles}}</span></div>
-        <div class="kv"><span>서비스</span><span class="mono" style="font-size:11.5px">{{services}}</span></div>
-        <div class="kv"><span>모듈</span><span><span class="chip ok">4개 설치됨</span> <span class="chip wn">1개는 연결 후 채워져요</span></span></div>
-        <div class="kv"><span>위치</span><span class="mono" style="font-size:11.5px">{{path}}</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="ft">
-    <button class="btn">설치 기록 보기</button>
-    <span style="margin-left:auto"></span>
-    <button class="btn">닫기</button>
-    <button class="btn pri" style="padding:0 28px">{{cta}}</button>
-  </div>
+  <div class="stp"><div class="s on"><i>1</i>역할</div><div class="s "><i>2</i>연결</div><div class="s "><i>3</i>모듈</div><div class="s "><i>4</i>의존성</div><div class="s "><i>5</i>옵션</div><div class="s "><i>6</i>요약</div><div class="s "><i>7</i>설치</div><div class="s "><i>8</i>완료</div></div>
+  <div class="bd"><h1>옛 버전 목록이라 받지 않았습니다</h1><p class="sub">이미 설치된 버전보다 낮은 목록은 쓰지 않아요. 아무것도 바뀌지 않았습니다.</p>
+<div class="pnl" style="margin-top:14px;padding:16px 20px;border-color:rgba(255,93,93,.4)">
+ <div style="display:flex;align-items:center;gap:8px;color:#ff5d5d"><svg viewBox="0 0 24 24" width="16" height="16" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/></svg><span class="cap" style="color:#ff5d5d">되돌림 거부</span></div>
+ <div class="kv" style="margin-top:8px"><span>설치된 버전</span><span class="mono" style="font-size:12px">0.6.0</span></div>
+ <div class="kv"><span>받은 목록</span><span class="mono" style="font-size:12px">0.5.9 <span class="chip bad" style="margin-left:6px">더 낮음</span></span></div>
+ <div class="kv"><span>받은 곳</span><span class="mono" style="font-size:12px">https://releases.example.net/release-index.json</span></div>
+<span class="cnt">1 / 8</span></div>
+<div class="alert i" style="margin-top:12px"><svg viewBox="0 0 24 24" width="16" height="16" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg><span>낡은 목록으로 옛 버전을 다시 설치하게 만드는 공격을 막으려는 거예요. 의도한 다운그레이드라면 지원하지 않습니다. 새 목록을 다시 받아 보세요.</span></div></div>
+  <div class="ft"><button class="btn ">닫기</button><span style="margin-left:auto"></span><button class="btn ">로컬 폴더로 바꾸기</button><button class="btn pri" style="padding:0 28px">최신 목록 다시 받기</button></div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":960,"height":640}}'>
-const CASES = [
-  { title:'Tree 설치가 끝났어요', lead:'Master가 켜졌어요. 이 컴퓨터가 Terra의 중심이 됩니다.', stepTitle:'Leaf를 붙일 주소를 열어 두세요', stepBody:'다른 컴퓨터의 Leaf가 붙으려면 Master 수신 주소가 필요해요. 연결 화면에서 코드를 만들 수 있습니다.', showAddr:true, showWarn:false, warn:'', roles:'Tree', services:'terra-daemon · terra-master', cta:'Terra 열기' },
-  { title:'Leaf 등록까지 끝났어요', lead:'Tree가 이 노드를 알아봤어요. 모듈은 Tree에서 이어서 채워집니다.', stepTitle:'이제 Terra를 열어도 돼요', stepBody:'Tree 쪽 노드 목록에 이 컴퓨터가 나타났어요. 남은 모듈은 연결된 동안 자동으로 내려옵니다.', showAddr:false, showWarn:false, warn:'', roles:'Leaf · 등록됨', services:'terra-daemon · terra-leaf-host', cta:'Terra 열기' },
-  { title:'Leaf 설치는 끝났어요', lead:'아직 Tree에 등록하지 않았어요.', stepTitle:'등록하기 전에는 할 수 있는 일이 없어요', stepBody:'이 컴퓨터의 브라우저에서는 등록 전까지 열 화면이 없습니다. 유지관리에서 언제든 등록할 수 있어요.', showAddr:false, showWarn:false, warn:'', roles:'Leaf · 등록 안 함', services:'terra-daemon · terra-leaf-host', cta:'지금 등록하기' },
-  { title:'설치는 끝났지만 등록이 늦어요', lead:'3분 안에 Tree가 응답하지 않았어요. 설치는 그대로 남아 있습니다.', stepTitle:'등록만 다시 시도하면 돼요', stepBody:'Tree가 켜져 있고 주소가 맞는지 확인한 뒤 등록을 다시 시도하세요. 파일을 다시 받지 않아요.', showAddr:false, showWarn:true, warn:'Daemon을 서비스가 아니라 직접 띄운 경우 재시작이 끝나지 않을 수 있어요.', roles:'Leaf · 등록 대기', services:'terra-daemon · terra-leaf-host', cta:'등록 다시 시도' }
-];
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { c: 0, os: 'L' }; }
-  renderVals() {
-    const c = this.state.c, d = CASES[c];
-    const v = Object.assign({}, d);
-    for (let i = 0; i < 4; i++) { v['p' + i] = c === i ? 'true' : 'false'; v['go' + i] = () => this.setState({ c: i }); }
-    const w = this.state.os === 'W';
-    v.osL = w ? 'false' : 'true'; v.osW = w ? 'true' : 'false'; v.goL = () => this.setState({ os: 'L' }); v.goW = () => this.setState({ os: 'W' });
-    v.path = w ? '%LOCALAPPDATA%\\Terra\\' + (c === 0 ? 'Tree\\' : 'Leaf\\') : '~/.local/share/terra/terra/';
-    return v;
-  }
+  renderVals() { return {}; }
 }
 </script>
 </body>

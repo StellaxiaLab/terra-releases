@@ -70,38 +70,48 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 .inp,.cmd,.seg,.sg{background:rgba(0,0,0,.35)}
 .seg button.sel,.seg span.sel,.sg button[aria-pressed=true]{background:#ede9e1}
 .chip{background-clip:padding-box}
-/*noborder*/</style>
+/*noborder*/button.sw{border:0;padding:0;cursor:pointer}button.sw:disabled{cursor:not-allowed}
+.sg{display:flex;border-radius:9px;overflow:hidden;background:rgba(0,0,0,.35);margin-right:6px}.sg button{height:26px;padding:0 11px;background:transparent;color:#b4bac3;font:500 11.5px 'Noto Sans KR',sans-serif;cursor:pointer;border:0}.sg button[aria-pressed=true]{background:#ede9e1;color:#111;font-weight:700}
+
+:focus-visible{outline:2px solid #7aa7ff!important;outline-offset:2px}
+.btn.pri:focus-visible,.seg button.sel:focus-visible,.sg button[aria-pressed=true]:focus-visible{outline-color:#7aa7ff;outline-offset:3px}
+.card[aria-pressed=true],.act[aria-pressed=true]{box-shadow:inset 0 0 0 2px rgba(237,233,225,.6)!important}
+.cnt{display:none;font:500 11px 'JetBrains Mono',monospace;color:#9aa1ab}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:800px){.win{width:100%}.win.stp-m,.win{grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.stp::before{margin:0 14px 0 0}.s:not(.on){display:none}.s.on{height:auto}.s::after{display:none}.cnt{display:inline;margin-left:auto}.bd{grid-column:1;grid-row:3;padding:18px 20px 0}.ft{grid-column:1;grid-row:4;padding:0 20px}}
+.win.nar{width:780px;grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.nar .stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.nar .stp::before{margin:0 14px 0 0}.nar .s:not(.on){display:none}.nar .s.on{height:auto}.nar .s::after{display:none}.nar .cnt{display:inline;margin-left:auto}.nar .bd{grid-column:1;grid-row:3;padding:18px 20px 0}.nar .ft{grid-column:1;grid-row:4;padding:0 20px}
+/*a11y-v2*/</style>
 </helmet>
 <div class="win">
   <div class="hd">
     <img src="/_blob/e73e951b60dbbe231a3619cceb4a3087" alt="" style="width:24px;height:24px">
     <span class="wm">TERRA</span><span class="cap" style="margin-left:4px">설치기</span>
     <span style="margin-left:auto"></span>
-    <span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
+    <span class="sg" role="group" aria-label="운영체제 미리보기"><button aria-pressed="{{osL}}" onClick="{{goL}}">Linux</button><button aria-pressed="{{osW}}" onClick="{{goW}}">Windows</button></span><span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
   </div>
   <div class="stp">
     <div class="s done"><i>1</i>역할</div><div class="s done"><i>2</i>연결</div><div class="s done"><i>3</i>모듈</div><div class="s done"><i>4</i>의존성</div><div class="s on"><i>5</i>옵션</div><div class="s"><i>6</i>요약</div><div class="s"><i>7</i>설치</div><div class="s"><i>8</i>완료</div>
-  </div>
+  <span class="cnt">5 / 8</span></div>
   <div class="bd">
     <h1>옵션을 정하세요</h1>
     <p class="sub">모든 옵션은 나중에 '수정'에서 같은 화면으로 켜고 끌 수 있어요.</p>
 
     <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
       <span class="lbl">설치 위치</span>
-      <div class="inp"><span class="mono" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">~/.local/share/terra/terra/</span><button class="btn" style="height:30px;padding:0 12px;font-size:12px">찾아보기</button></div>
+      <div class="inp"><span class="mono" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{path}}</span><button class="btn" style="height:30px;padding:0 12px;font-size:12px">찾아보기</button></div>
     </div>
 
     <div class="pnl" style="margin-top:14px">
-      <div class="op"><div style="flex:1;min-width:0"><div class="t">PATH에 등록</div><div class="hint">터미널에서 <span class="mono">terra</span> 명령을 바로 쓸 수 있어요.</div></div><span class="sw on"></span></div>
-      <div class="op"><div style="flex:1;min-width:0"><div class="t">gateway</div><div class="hint">끄면 Gateway 컨트롤 플레인만 꺼진 채 동작해요.</div></div><span class="sw on"></span></div>
+      <div class="op"><div style="flex:1;min-width:0"><div class="t">PATH에 등록</div><div class="hint">{{pathHint}}</div></div><button class="sw on" role="switch" aria-checked="true" aria-label="PATH에 등록"></button></div>
+      <div class="op"><div style="flex:1;min-width:0"><div class="t">gateway</div><div class="hint">끄면 Gateway 컨트롤 플레인만 꺼진 채 동작해요.</div></div><button class="sw on" role="switch" aria-checked="true" aria-label="gateway"></button></div>
       <div class="op" style="flex-wrap:wrap">
-        <div style="flex:1;min-width:0"><div class="t">fleet-host</div><div class="hint">Master가 이 노드에 놓은 컨테이너 좌석을 docker로 실행해요.</div></div><span class="sw on"></span>
+        <div style="flex:1;min-width:0"><div class="t">fleet-host</div><div class="hint">Master가 이 노드에 놓은 컨테이너 좌석을 docker로 실행해요.</div></div><button class="sw on" role="switch" aria-checked="true" aria-label="fleet-host"></button>
         <div style="flex-basis:100%;display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:10px;border:1px solid rgba(255,93,93,.4);background:rgba(255,93,93,.07);color:#f0b9b9;font-size:12px;line-height:1.55">
           <svg viewBox="0 0 24 24" width="16" height="16" style="flex:none;margin-top:1px;color:#ff5d5d;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/></svg>
-          <span>docker를 찾지 못했어요. 이대로 켜면 데몬이 계속 다시 시작됩니다. 이전 단계에서 docker 설치를 승인하거나 이 옵션을 끄세요.</span>
+          <span>{{dkName}}을(를) 찾지 못했어요. 이대로 켜면 데몬이 계속 다시 시작됩니다. 이전 단계에서 docker 설치를 승인하거나 이 옵션을 끄세요.</span>
         </div>
       </div>
-      <div class="op"><div style="flex:1;min-width:0"><div class="t">ssh-server</div><div class="hint">OpenSSH 서버 설치를 건너뛰어서 꺼져 있어요.</div></div><span class="sw dis"></span></div>
+      <div class="op"><div style="flex:1;min-width:0"><div class="t">ssh-server</div><div class="hint">OpenSSH 서버 설치를 건너뛰어서 꺼져 있어요.</div></div><button class="sw dis" role="switch" aria-checked="false" aria-label="ssh-server" disabled></button></div>
     </div>
   </div>
   <div class="ft">
@@ -113,8 +123,14 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":960,"height":640}}'>
+const LX = {"path": "~/.local/share/terra/terra/", "pathHint": "터미널에서 terra 명령을 바로 쓸 수 있어요.", "dkName": "docker"};
+const WN = {"path": "%LOCALAPPDATA%\\Terra\\Leaf\\", "pathHint": "사용자 PATH에 등록해요. 새로 연 터미널부터 terra 명령을 쓸 수 있어요.", "dkName": "Docker Desktop"};
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  constructor(p){ super(p); this.state = { os: 'L' }; }
+  renderVals() {
+    const w = this.state.os === 'W';
+    return Object.assign({ osL: w ? 'false' : 'true', osW: w ? 'true' : 'false', goL: () => this.setState({ os: 'L' }), goW: () => this.setState({ os: 'W' }) }, w ? WN : LX);
+  }
 }
 </script>
 </body>

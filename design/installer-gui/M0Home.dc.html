@@ -83,14 +83,23 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 .inp,.cmd,.seg,.sg{background:rgba(0,0,0,.35)}
 .seg button.sel,.seg span.sel,.sg button[aria-pressed=true]{background:#ede9e1}
 .chip{background-clip:padding-box}
-/*noborder*/</style>
+/*noborder*/.sg{display:flex;border-radius:9px;overflow:hidden;background:rgba(0,0,0,.35);margin-right:6px}.sg button{height:26px;padding:0 11px;background:transparent;color:#b4bac3;font:500 11.5px 'Noto Sans KR',sans-serif;cursor:pointer;border:0}.sg button[aria-pressed=true]{background:#ede9e1;color:#111;font-weight:700}
+
+:focus-visible{outline:2px solid #7aa7ff!important;outline-offset:2px}
+.btn.pri:focus-visible,.seg button.sel:focus-visible,.sg button[aria-pressed=true]:focus-visible{outline-color:#7aa7ff;outline-offset:3px}
+.card[aria-pressed=true],.act[aria-pressed=true]{box-shadow:inset 0 0 0 2px rgba(237,233,225,.6)!important}
+.cnt{display:none;font:500 11px 'JetBrains Mono',monospace;color:#9aa1ab}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:800px){.win{width:100%}.win.stp-m,.win{grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.stp::before{margin:0 14px 0 0}.s:not(.on){display:none}.s.on{height:auto}.s::after{display:none}.cnt{display:inline;margin-left:auto}.bd{grid-column:1;grid-row:3;padding:18px 20px 0}.ft{grid-column:1;grid-row:4;padding:0 20px}}
+.win.nar{width:780px;grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.nar .stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.nar .stp::before{margin:0 14px 0 0}.nar .s:not(.on){display:none}.nar .s.on{height:auto}.nar .s::after{display:none}.nar .cnt{display:inline;margin-left:auto}.nar .bd{grid-column:1;grid-row:3;padding:18px 20px 0}.nar .ft{grid-column:1;grid-row:4;padding:0 20px}
+/*a11y-v2*/</style>
 </helmet>
 <div class="win">
   <div class="hd">
     <img src="/_blob/e73e951b60dbbe231a3619cceb4a3087" alt="" style="width:24px;height:24px">
     <span class="wm">TERRA</span><span class="cap" style="margin-left:4px">설치기</span>
     <span style="margin-left:auto"></span>
-    <span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
+    <span class="sg" role="group" aria-label="운영체제 미리보기"><button aria-pressed="{{osL}}" onClick="{{goL}}">Linux</button><button aria-pressed="{{osW}}" onClick="{{goW}}">Windows</button></span><span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
   </div>
   <div class="crumb">유지관리<span>/</span><b>홈</b></div>
   <div class="bd"><h1>Terra가 설치돼 있어요</h1><p class="sub">할 일을 고르세요. 지금 상태는 설치 기록 기준입니다.</p>
@@ -99,8 +108,8 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
   <div style="display:flex;align-items:center;gap:8px"><span class="cap">현재 설치</span><span class="chip tr">Tree</span><span class="chip lf">Leaf</span></div>
   <div style="display:flex;align-items:baseline;gap:10px;margin-top:8px"><span class="mono" style="font-size:26px;font-weight:600">0.5.9</span><span class="chip wn">업데이트 가능 · 0.6.0</span></div>
   <div class="kv" style="margin-top:10px"><span>서비스</span><span><span class="chip ok">terra-daemon 실행 중</span> <span class="chip ok">terra-leaf-host 실행 중</span></span></div>
-  <div class="kv"><span>모듈</span><span>5개 · 릴리스 <span class="mono" style="font-size:11.5px">modules-2026.09</span></span></div>
-  <div class="kv"><span>위치</span><span class="mono" style="font-size:11.5px">~/.local/share/terra/terra/</span></div>
+  <div class="kv"><span>모듈</span><span>5개 · 릴리스 <span class="mono" style="font-size:11.5px">v2026.10.05</span></span></div>
+  <div class="kv"><span>위치</span><span class="mono" style="font-size:11.5px">{{path}}</span></div>
  </div>
  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
   <button class="pnl act" style="padding:14px 18px;text-align:left;color:inherit;cursor:pointer;border-color:rgba(237,233,225,.5)"><div style="font-size:14px;font-weight:700">업데이트</div><div class="hint">0.5.9 에서 0.6.0 으로 올려요</div></button>
@@ -113,8 +122,14 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":960,"height":640}}'>
+const LX = {"path": "~/.local/share/terra/terra/"};
+const WN = {"path": "%LOCALAPPDATA%\\Terra\\Leaf\\"};
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  constructor(p){ super(p); this.state = { os: 'L' }; }
+  renderVals() {
+    const w = this.state.os === 'W';
+    return Object.assign({ osL: w ? 'false' : 'true', osW: w ? 'true' : 'false', goL: () => this.setState({ os: 'L' }), goW: () => this.setState({ os: 'W' }) }, w ? WN : LX);
+  }
 }
 </script>
 </body>

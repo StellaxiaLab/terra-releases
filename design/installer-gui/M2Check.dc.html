@@ -83,7 +83,16 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 .inp,.cmd,.seg,.sg{background:rgba(0,0,0,.35)}
 .seg button.sel,.seg span.sel,.sg button[aria-pressed=true]{background:#ede9e1}
 .chip{background-clip:padding-box}
-/*noborder*/</style>
+/*noborder*/button.ck{padding:0;background:transparent;color:inherit;cursor:pointer}button.ck.on{background:#ede9e1}
+
+:focus-visible{outline:2px solid #7aa7ff!important;outline-offset:2px}
+.btn.pri:focus-visible,.seg button.sel:focus-visible,.sg button[aria-pressed=true]:focus-visible{outline-color:#7aa7ff;outline-offset:3px}
+.card[aria-pressed=true],.act[aria-pressed=true]{box-shadow:inset 0 0 0 2px rgba(237,233,225,.6)!important}
+.cnt{display:none;font:500 11px 'JetBrains Mono',monospace;color:#9aa1ab}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:800px){.win{width:100%}.win.stp-m,.win{grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.stp::before{margin:0 14px 0 0}.s:not(.on){display:none}.s.on{height:auto}.s::after{display:none}.cnt{display:inline;margin-left:auto}.bd{grid-column:1;grid-row:3;padding:18px 20px 0}.ft{grid-column:1;grid-row:4;padding:0 20px}}
+.win.nar{width:780px;grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.nar .stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.nar .stp::before{margin:0 14px 0 0}.nar .s:not(.on){display:none}.nar .s.on{height:auto}.nar .s::after{display:none}.nar .cnt{display:inline;margin-left:auto}.nar .bd{grid-column:1;grid-row:3;padding:18px 20px 0}.nar .ft{grid-column:1;grid-row:4;padding:0 20px}
+/*a11y-v2*/</style>
 </helmet>
 <div class="win">
   <div class="hd">
@@ -96,10 +105,10 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
   <div class="bd"><h1>기록과 다른 곳을 찾았어요</h1><p class="sub">고칠 항목을 고르세요. 직접 고친 파일은 따로 한 번 더 확인합니다.</p>
 <div class="pnl" style="margin-top:14px;padding:6px 0">
  <div class="tb h" style="grid-template-columns:22px minmax(0,1fr) 120px 150px"><span></span><span>항목</span><span>상태</span><span>고치는 방법</span></div>
- <div class="tb" style="grid-template-columns:22px minmax(0,1fr) 120px 150px"><span class="ck on"><svg viewBox="0 0 24 24" width="12" height="12" style="fill:none;stroke:#07090c;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5 9-10"/></svg></span><span class="mono" style="font-size:12px">bin/terra-daemon</span><span class="chip bad">파일 없음</span><span class="hint">다시 받아 배치</span></div>
- <div class="tb" style="grid-template-columns:22px minmax(0,1fr) 120px 150px"><span class="ck on"><svg viewBox="0 0 24 24" width="12" height="12" style="fill:none;stroke:#07090c;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5 9-10"/></svg></span><span class="mono" style="font-size:12px">modules/io.terra.player</span><span class="chip wn">해시 다름</span><span class="hint">다시 받아 덮어쓰기</span></div>
- <div class="tb" style="grid-template-columns:22px minmax(0,1fr) 120px 150px"><span class="ck"></span><span class="mono" style="font-size:12px">config/gateway.toml</span><span class="chip wn">직접 수정됨</span><span class="hint">덮어쓰면 수정이 사라져요</span></div>
- <div class="tb" style="grid-template-columns:22px minmax(0,1fr) 120px 150px"><span class="ck on"><svg viewBox="0 0 24 24" width="12" height="12" style="fill:none;stroke:#07090c;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5 9-10"/></svg></span><span style="font-size:12.5px">terra-leaf-host 서비스</span><span class="chip bad">꺼져 있음</span><span class="hint">서비스 다시 켜기</span></div>
+ <div class="tb" style="grid-template-columns:22px minmax(0,1fr) 120px 150px"><button class="ck on" role="checkbox" aria-checked="true" aria-label="고칠 항목 선택"><svg viewBox="0 0 24 24" width="12" height="12" style="fill:none;stroke:#07090c;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5 9-10"/></svg></button><span class="mono" style="font-size:12px">bin/terra-daemon</span><span class="chip bad">파일 없음</span><span class="hint">다시 받아 배치</span></div>
+ <div class="tb" style="grid-template-columns:22px minmax(0,1fr) 120px 150px"><button class="ck on" role="checkbox" aria-checked="true" aria-label="고칠 항목 선택"><svg viewBox="0 0 24 24" width="12" height="12" style="fill:none;stroke:#07090c;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5 9-10"/></svg></button><span class="mono" style="font-size:12px">modules/io.terra.player</span><span class="chip wn">해시 다름</span><span class="hint">다시 받아 덮어쓰기</span></div>
+ <div class="tb" style="grid-template-columns:22px minmax(0,1fr) 120px 150px"><button class="ck" role="checkbox" aria-checked="false" aria-label="고칠 항목 선택"></button><span class="mono" style="font-size:12px">config/gateway.toml</span><span class="chip wn">직접 수정됨</span><span class="hint">덮어쓰면 수정이 사라져요</span></div>
+ <div class="tb" style="grid-template-columns:22px minmax(0,1fr) 120px 150px"><button class="ck on" role="checkbox" aria-checked="true" aria-label="고칠 항목 선택"><svg viewBox="0 0 24 24" width="12" height="12" style="fill:none;stroke:#07090c;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12l5 5 9-10"/></svg></button><span style="font-size:12.5px">terra-leaf-host 서비스</span><span class="chip bad">꺼져 있음</span><span class="hint">서비스 다시 켜기</span></div>
 </div>
 <div class="alert w" style="margin-top:12px"><svg viewBox="0 0 24 24" width="16" height="16" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/></svg><span>직접 수정한 파일 1개는 선택하지 않았어요. 덮어쓰려면 체크한 뒤 다음 화면에서 한 번 더 확인합니다.</span></div></div>
   <div class="ft"><button class="btn ">돌아가기</button><span class="hint mono" style="margin-left:8px">3개 선택</span><span style="margin-left:auto"></span><button class="btn pri" style="padding:0 28px">선택한 항목 고치기</button></div>

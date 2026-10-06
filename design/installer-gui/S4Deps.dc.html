@@ -40,9 +40,9 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 .sub{margin:0;font-size:13px;line-height:1.6;color:#b4bac3}
 .hint{font-size:12px;line-height:1.5;color:#9aa1ab}
 .seg{display:flex;border:1px solid rgba(255,255,255,.18);border-radius:10px;overflow:hidden;background:#0e1013;width:176px;flex:none}
-.seg span{flex:1;height:34px;display:flex;align-items:center;justify-content:center;font-size:12.5px;color:#b4bac3;border-right:1px solid rgba(255,255,255,.10)}
-.seg span:last-child{border-right:0}
-.seg span.sel{background:#ede9e1;color:#111;font-weight:700}
+.seg button{font-family:'Noto Sans KR',sans-serif;background:transparent;cursor:pointer;border:0;flex:1;height:34px;display:flex;align-items:center;justify-content:center;font-size:12.5px;color:#b4bac3;border-right:1px solid rgba(255,255,255,.10)}
+.seg button:last-child{border-right:0}
+.seg button.sel{background:#ede9e1;color:#111;font-weight:700}
 .dep{display:flex;gap:16px;align-items:flex-start;padding:14px 18px}
 .cmd{margin-top:8px;padding:8px 12px;border-radius:9px;background:#0b0d10;border:1px solid rgba(255,255,255,.08);font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#b4bac3;word-break:break-all}
 
@@ -65,20 +65,29 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 .btn.pri{background:#ede9e1}
 .btn.dg{background:rgba(255,93,93,.12)}
 .inp,.cmd,.seg,.sg{background:rgba(0,0,0,.35)}
-.seg button.sel,.seg span.sel,.sg button[aria-pressed=true]{background:#ede9e1}
+.seg button.sel,.seg button.sel,.sg button[aria-pressed=true]{background:#ede9e1}
 .chip{background-clip:padding-box}
-/*noborder*/</style>
+/*noborder*/.sg{display:flex;border-radius:9px;overflow:hidden;background:rgba(0,0,0,.35);margin-right:6px}.sg button{height:26px;padding:0 11px;background:transparent;color:#b4bac3;font:500 11.5px 'Noto Sans KR',sans-serif;cursor:pointer;border:0}.sg button[aria-pressed=true]{background:#ede9e1;color:#111;font-weight:700}
+
+:focus-visible{outline:2px solid #7aa7ff!important;outline-offset:2px}
+.btn.pri:focus-visible,.seg button.sel:focus-visible,.sg button[aria-pressed=true]:focus-visible{outline-color:#7aa7ff;outline-offset:3px}
+.card[aria-pressed=true],.act[aria-pressed=true]{box-shadow:inset 0 0 0 2px rgba(237,233,225,.6)!important}
+.cnt{display:none;font:500 11px 'JetBrains Mono',monospace;color:#9aa1ab}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:800px){.win{width:100%}.win.stp-m,.win{grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.stp::before{margin:0 14px 0 0}.s:not(.on){display:none}.s.on{height:auto}.s::after{display:none}.cnt{display:inline;margin-left:auto}.bd{grid-column:1;grid-row:3;padding:18px 20px 0}.ft{grid-column:1;grid-row:4;padding:0 20px}}
+.win.nar{width:780px;grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.nar .stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.nar .stp::before{margin:0 14px 0 0}.nar .s:not(.on){display:none}.nar .s.on{height:auto}.nar .s::after{display:none}.nar .cnt{display:inline;margin-left:auto}.nar .bd{grid-column:1;grid-row:3;padding:18px 20px 0}.nar .ft{grid-column:1;grid-row:4;padding:0 20px}
+/*a11y-v2*/</style>
 </helmet>
 <div class="win">
   <div class="hd">
     <img src="/_blob/e73e951b60dbbe231a3619cceb4a3087" alt="" style="width:24px;height:24px">
     <span class="wm">TERRA</span><span class="cap" style="margin-left:4px">설치기</span>
     <span style="margin-left:auto"></span>
-    <span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
+    <span class="sg" role="group" aria-label="운영체제 미리보기"><button aria-pressed="{{osL}}" onClick="{{goL}}">Linux</button><button aria-pressed="{{osW}}" onClick="{{goW}}">Windows</button></span><span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
   </div>
   <div class="stp">
     <div class="s done"><i>1</i>역할</div><div class="s done"><i>2</i>연결</div><div class="s done"><i>3</i>모듈</div><div class="s on"><i>4</i>의존성</div><div class="s"><i>5</i>옵션</div><div class="s"><i>6</i>요약</div><div class="s"><i>7</i>설치</div><div class="s"><i>8</i>완료</div>
-  </div>
+  <span class="cnt">4 / 8</span></div>
   <div class="bd">
     <h1>함께 필요한 도구를 확인했어요</h1>
     <p class="sub">없는 도구는 설치 계획을 보고 하나씩 승인하세요. 건너뛰면 해당 기능만 꺼집니다.</p>
@@ -86,26 +95,26 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
     <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
       <div class="pnl dep">
         <div style="flex:1;min-width:0">
-          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:700">WireGuard</span><span class="mono" style="font-size:11px;color:#9aa1ab">wireguard-tools</span><span class="chip wn">없음</span><span class="chip wn">관리자 권한 필요</span></div>
-          <div class="cmd">sudo apt-get install -y wireguard-tools</div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:700">WireGuard</span><span class="mono" style="font-size:11px;color:#9aa1ab">{{wgPkg}}</span><span class="chip wn">없음</span><span class="chip wn">{{adm}}</span></div>
+          <div class="cmd">{{wgCmd}}</div>
           <div class="hint" style="margin-top:6px">건너뛰면 노드 사이 WireGuard 연결이 꺼져요.</div>
         </div>
-        <div class="seg"><span class="sel">승인</span><span>건너뛰기</span></div>
+        <div class="seg"><button class="sel" aria-pressed="true">승인</button><button aria-pressed="false">건너뛰기</button></div>
       </div>
       <div class="pnl dep">
         <div style="flex:1;min-width:0">
-          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:700">Docker</span><span class="mono" style="font-size:11px;color:#9aa1ab">docker.io</span><span class="chip wn">없음</span><span class="chip wn">관리자 권한 필요</span></div>
-          <div class="cmd">sudo apt-get install -y docker.io</div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:700">Docker</span><span class="mono" style="font-size:11px;color:#9aa1ab">{{dkPkg}}</span><span class="chip wn">없음</span><span class="chip wn">{{adm}}</span></div>
+          <div class="cmd">{{dkCmd}}</div>
           <div class="hint" style="margin-top:6px">건너뛰면 fleet-host를 쓸 수 없어요. Master가 이 노드에 놓은 컨테이너 좌석을 돌리지 못합니다.</div>
         </div>
-        <div class="seg"><span>승인</span><span class="sel">건너뛰기</span></div>
+        <div class="seg"><button aria-pressed="false">승인</button><button class="sel" aria-pressed="true">건너뛰기</button></div>
       </div>
       <div class="pnl dep">
         <div style="flex:1;min-width:0">
-          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:700">OpenSSH 서버</span><span class="mono" style="font-size:11px;color:#9aa1ab">openssh-server</span><span class="chip ok">있음</span><span class="chip">9.6</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:700">OpenSSH 서버</span><span class="mono" style="font-size:11px;color:#9aa1ab">{{sshPkg}}</span><span class="chip ok">있음</span><span class="chip">9.6</span></div>
           <div class="hint" style="margin-top:8px">이미 설치돼 있어서 할 일이 없어요. ssh-server 옵션을 켠 경우에만 쓰입니다.</div>
         </div>
-        <div class="seg" style="opacity:.4"><span class="sel">승인</span><span>건너뛰기</span></div>
+        <div class="seg" style="opacity:.4"><button class="sel" aria-pressed="true">승인</button><button aria-pressed="false">건너뛰기</button></div>
       </div>
     </div>
   </div>
@@ -113,7 +122,7 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
     <button class="btn">취소</button>
     <span style="display:flex;align-items:center;gap:8px;margin-left:8px">
       <svg viewBox="0 0 24 24" width="15" height="15" style="color:#f5b83d;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>
-      <span class="hint">승인한 항목 중 1개가 sudo를 사용해요</span>
+      <span class="hint">{{sudoNote}}</span>
     </span>
     <span style="margin-left:auto"></span>
     <button class="btn">이전</button>
@@ -122,8 +131,14 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":960,"height":640}}'>
+const LX = {"wgCmd": "sudo apt-get install -y wireguard-tools", "dkCmd": "sudo apt-get install -y docker.io", "wgPkg": "wireguard-tools", "dkPkg": "docker.io", "sshPkg": "openssh-server", "adm": "관리자 권한 필요", "sudoNote": "승인한 항목 중 1개가 sudo를 사용해요"};
+const WN = {"wgCmd": "winget install --id WireGuard.WireGuard -e", "dkCmd": "winget install --id Docker.DockerDesktop -e", "wgPkg": "WireGuard.WireGuard", "dkPkg": "Docker.DockerDesktop", "sshPkg": "OpenSSH.Server", "adm": "UAC 승인 필요", "sudoNote": "승인한 항목 중 1개가 Windows 관리자 승인(UAC)을 요청해요"};
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  constructor(p){ super(p); this.state = { os: 'L' }; }
+  renderVals() {
+    const w = this.state.os === 'W';
+    return Object.assign({ osL: w ? 'false' : 'true', osW: w ? 'true' : 'false', goL: () => this.setState({ os: 'L' }), goW: () => this.setState({ os: 'W' }) }, w ? WN : LX);
+  }
 }
 </script>
 </body>

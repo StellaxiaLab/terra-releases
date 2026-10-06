@@ -66,3 +66,4 @@ language: "ko-KR"
 | 날짜 | 내용 |
 | --- | --- |
 | 2026-10-06 | v0.1 — 시안 0e1adab 검토 |
+| 2026-10-06 | 디자인 세션 반영 — DR-1~DR-15 시안 수정과 `design/installer-gui/handoff.md`, `fonts.md` 추가 |

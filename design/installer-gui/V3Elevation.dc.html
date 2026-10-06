@@ -93,32 +93,44 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 .inp,.cmd,.seg,.sg{background:rgba(0,0,0,.35)}
 .seg button.sel,.seg span.sel,.sg button[aria-pressed=true]{background:#ede9e1}
 .chip{background-clip:padding-box}
-/*noborder*/</style>
+/*noborder*/.sg{display:flex;border-radius:9px;overflow:hidden;background:rgba(0,0,0,.35);margin-right:6px}.sg button{height:26px;padding:0 11px;background:transparent;color:#b4bac3;font:500 11.5px 'Noto Sans KR',sans-serif;cursor:pointer;border:0}.sg button[aria-pressed=true]{background:#ede9e1;color:#111;font-weight:700}
+
+:focus-visible{outline:2px solid #7aa7ff!important;outline-offset:2px}
+.btn.pri:focus-visible,.seg button.sel:focus-visible,.sg button[aria-pressed=true]:focus-visible{outline-color:#7aa7ff;outline-offset:3px}
+.card[aria-pressed=true],.act[aria-pressed=true]{box-shadow:inset 0 0 0 2px rgba(237,233,225,.6)!important}
+.cnt{display:none;font:500 11px 'JetBrains Mono',monospace;color:#9aa1ab}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:800px){.win{width:100%}.win.stp-m,.win{grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.stp::before{margin:0 14px 0 0}.s:not(.on){display:none}.s.on{height:auto}.s::after{display:none}.cnt{display:inline;margin-left:auto}.bd{grid-column:1;grid-row:3;padding:18px 20px 0}.ft{grid-column:1;grid-row:4;padding:0 20px}}
+.win.nar{width:780px;grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.nar .stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.nar .stp::before{margin:0 14px 0 0}.nar .s:not(.on){display:none}.nar .s.on{height:auto}.nar .s::after{display:none}.nar .cnt{display:inline;margin-left:auto}.nar .bd{grid-column:1;grid-row:3;padding:18px 20px 0}.nar .ft{grid-column:1;grid-row:4;padding:0 20px}
+/*a11y-v2*/</style>
 </helmet>
 <div class="win">
   <div class="hd">
     <img src="/_blob/e73e951b60dbbe231a3619cceb4a3087" alt="" style="width:24px;height:24px">
     <span class="wm">TERRA</span><span class="cap" style="margin-left:4px">설치기</span>
     <span style="margin-left:auto"></span>
-    <span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
+    <span class="sg" role="group" aria-label="운영체제 미리보기"><button aria-pressed="{{osL}}" onClick="{{goL}}">Linux</button><button aria-pressed="{{osW}}" onClick="{{goW}}">Windows</button></span><span class="chip ok">서명 확인됨</span><span class="mono" style="font-size:11px;color:#9aa1ab">카탈로그 0.6.0</span>
   </div>
   <div class="stp"><div class="s done"><i>1</i>역할</div><div class="s done"><i>2</i>연결</div><div class="s done"><i>3</i>모듈</div><div class="s done"><i>4</i>의존성</div><div class="s done"><i>5</i>옵션</div><div class="s done"><i>6</i>요약</div><div class="s on"><i>7</i>설치</div><div class="s "><i>8</i>완료</div></div>
   <div class="bd"><h1>관리자 권한이 승인되지 않았어요</h1><p class="sub">WireGuard 도구를 설치하려면 관리자 권한이 필요해요. 아직 아무것도 바꾸지 않았습니다.</p>
 <div class="pnl" style="margin-top:14px;padding:16px 20px;border-color:rgba(245,184,61,.4)">
  <div style="display:flex;align-items:center;gap:8px;color:#f5b83d"><svg viewBox="0 0 24 24" width="16" height="16" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg><span class="cap" style="color:#f5b83d">승인 필요</span></div>
- <div class="cmd" style="margin-top:10px">sudo apt-get install -y wireguard-tools</div>
- <div class="hint" style="margin-top:8px">승인 창은 별도 프로세스에서 열려요. 창이 보이지 않으면 터미널에서 비밀번호 입력을 기다리고 있는지 확인하세요.</div>
-</div>
-<div style="display:flex;gap:12px;margin-top:12px">
- <div class="pnl" style="flex:1;padding:12px 18px"><div style="font-size:13.5px;font-weight:700">다시 시도</div><div class="hint">승인 창을 다시 열어요.</div></div>
- <div class="pnl" style="flex:1;padding:12px 18px"><div style="font-size:13.5px;font-weight:700">내 계정으로만 설치</div><div class="hint">관리자 권한이 필요한 기능은 꺼져요.</div></div>
+ <div class="cmd" style="margin-top:10px">{{cmd}}</div>
+ <div class="hint" style="margin-top:8px">{{hint}}</div>
+ <div class="hint" style="margin-top:12px"><b style="color:#b4bac3">다시 시도</b> — 승인 창을 다시 열어요.<br><b style="color:#b4bac3">내 계정으로만 설치</b> — 관리자 권한이 필요한 기능(WireGuard 연결)은 꺼진 채로 설치돼요.</div>
 </div></div>
   <div class="ft"><button class="btn ">취소</button><span style="margin-left:auto"></span><button class="btn ">내 계정으로만 설치</button><button class="btn pri" style="padding:0 28px">다시 시도</button></div>
-</div>
+<span class="cnt">7 / 8</span></div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":960,"height":640}}'>
+const LX = {"cmd": "sudo apt-get install -y wireguard-tools", "hint": "승인 창은 별도 프로세스에서 열려요. 창이 보이지 않으면 터미널에서 비밀번호 입력을 기다리고 있는지 확인하세요."};
+const WN = {"cmd": "winget install --id WireGuard.WireGuard -e", "hint": "Windows 관리자 승인(UAC) 창에서 '예'를 눌러야 해요. 창이 보이지 않으면 작업 표시줄에서 깜박이는 아이콘을 확인하세요."};
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  constructor(p){ super(p); this.state = { os: 'L' }; }
+  renderVals() {
+    const w = this.state.os === 'W';
+    return Object.assign({ osL: w ? 'false' : 'true', osW: w ? 'true' : 'false', goL: () => this.setState({ os: 'L' }), goW: () => this.setState({ os: 'W' }) }, w ? WN : LX);
+  }
 }
 </script>
 </body>

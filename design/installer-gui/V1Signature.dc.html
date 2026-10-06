@@ -93,7 +93,15 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 .inp,.cmd,.seg,.sg{background:rgba(0,0,0,.35)}
 .seg button.sel,.seg span.sel,.sg button[aria-pressed=true]{background:#ede9e1}
 .chip{background-clip:padding-box}
-/*noborder*/</style>
+/*noborder*/.kv span:first-child{width:96px!important}
+:focus-visible{outline:2px solid #7aa7ff!important;outline-offset:2px}
+.btn.pri:focus-visible,.seg button.sel:focus-visible,.sg button[aria-pressed=true]:focus-visible{outline-color:#7aa7ff;outline-offset:3px}
+.card[aria-pressed=true],.act[aria-pressed=true]{box-shadow:inset 0 0 0 2px rgba(237,233,225,.6)!important}
+.cnt{display:none;font:500 11px 'JetBrains Mono',monospace;color:#9aa1ab}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:800px){.win{width:100%}.win.stp-m,.win{grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.stp::before{margin:0 14px 0 0}.s:not(.on){display:none}.s.on{height:auto}.s::after{display:none}.cnt{display:inline;margin-left:auto}.bd{grid-column:1;grid-row:3;padding:18px 20px 0}.ft{grid-column:1;grid-row:4;padding:0 20px}}
+.win.nar{width:780px;grid-template-columns:minmax(0,1fr);grid-template-rows:52px 44px minmax(0,1fr) 60px}.nar .stp{grid-column:1;grid-row:2;flex-direction:row;align-items:center;height:44px;padding:0 20px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}.nar .stp::before{margin:0 14px 0 0}.nar .s:not(.on){display:none}.nar .s.on{height:auto}.nar .s::after{display:none}.nar .cnt{display:inline;margin-left:auto}.nar .bd{grid-column:1;grid-row:3;padding:18px 20px 0}.nar .ft{grid-column:1;grid-row:4;padding:0 20px}
+/*a11y-v2*/</style>
 </helmet>
 <div class="win">
   <div class="hd">
@@ -107,8 +115,14 @@ h1{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 <div class="pnl" style="margin-top:14px;padding:16px 20px;border-color:rgba(255,93,93,.4)">
  <div style="display:flex;align-items:center;gap:8px;color:#ff5d5d"><svg viewBox="0 0 24 24" width="16" height="16" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/></svg><span class="cap" style="color:#ff5d5d">서명 확인 실패</span></div>
  <div class="sub" style="margin-top:8px">release-index.json 의 서명이 이 설치기에 들어 있는 공개 키와 맞지 않아요. 전송 중 파일이 바뀌었거나 잘못된 주소일 수 있어요.</div>
- <div class="cmd" style="margin-top:12px">source  https://releases.example.net/release-index.json<br>key     ed25519 · 9f2c…41ab<br>result  signature mismatch</div>
-</div>
+ <div class="cmd" style="margin-top:12px">source  https://releases.example.net/release-index.json<br>key     ed25519<br>result  signature mismatch</div>
+ <div class="kv" style="margin-top:12px;border-top:0;align-items:center"><span>지문</span><span class="mono" style="font-size:12px;color:#ede9e1">9f2c 1a7e 55b0 d3c4 8e61 07fa b2c9 41ab</span><button class="btn" style="height:28px;padding:0 12px;font-size:12px;flex:none">복사</button></div>
+ <div class="hint" style="margin-top:2px">이 설치기에 들어 있는 공개 키의 지문이에요. 릴리스 페이지에 적힌 값과 비교해 보세요.</div>
+ <div style="margin-top:10px;display:flex;align-items:center;gap:8px"><svg viewBox="0 0 24 24" width="14" height="14" style="color:#9aa1ab;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M6 9l6 6 6-6"/></svg><span style="font-size:13px;font-weight:600">자세히</span></div>
+ <div class="kv" style="margin-top:4px"><span>키 유효 기간</span><span class="mono" style="font-size:12px">2026-01-01 ~ 2027-01-01</span></div>
+ <div class="kv"><span>서명 시각</span><span class="mono" style="font-size:12px">2026-10-05 09:12 (KST)</span></div>
+ <div class="kv"><span>받은 서명 키</span><span class="mono" style="font-size:12px">3b71 e08d 94aa 0c52 f6d8 21b7 7c3e 0a96</span></div>
+<span class="cnt">1 / 8</span></div>
 <div class="alert i" style="margin-top:12px"><svg viewBox="0 0 24 24" width="16" height="16" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg><span>이 상태에서는 설치를 이어갈 수 없어요. 다시 시도하거나, 신뢰하는 로컬 폴더에서 설치하세요.</span></div></div>
   <div class="ft"><button class="btn ">취소</button><span style="margin-left:auto"></span><button class="btn ">로컬 폴더로 바꾸기</button><button class="btn pri" style="padding:0 28px">다시 시도</button></div>
 </div>
