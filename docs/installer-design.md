@@ -171,7 +171,8 @@ Terra 저장소 릴리스는 내부 기록·검증용으로 계속 둔다. 사�
 
 | ID | 질문 | 권고 |
 | --- | --- | --- |
-| Q-1 | `lab.stellaxia.node-gui` `.tmod`가 modules 릴리스에 실제로 올라가 있는가 | **확인함(2026-10-06).** `v2026.10.05`에 `lab.stellaxia.node-gui-0.2.0.tmod`가 있다(플랫폼 접미사 없는 단일 자산). 그러나 modules `main`의 모듈은 **0.4.0**(maingui `a884226`)이라 릴리스가 **두 단계 낡았다**. 설치기가 최신 GUI를 받으려면 modules가 새 태그를 찍어야 하고, Terra `bundled-modules.json`의 핀도 올려야 한다. 또 이 모듈이 `bundled-modules.json`에 선언돼 있는지는 확인하지 못했다 |
+| Q-1 | `lab.stellaxia.node-gui` `.tmod`가 modules 릴리스에 실제로 올라가 있는가 | **확인함(2026-10-06).** `v2026.10.05`에 `lab.stellaxia.node-gui-0.2.0.tmod`가 있다(플랫폼 접미사 없는 단일 자산). 그러나 modules `main`의 모듈은 **0.4.0**(maingui `a884226`)이라 릴리스가 **두 단계 낡았다**. 설치기가 최신 GUI를 받으려면 modules가 새 태그를 찍어야 하고, Terra `bundled-modules.json`의 핀도 올려야 한다. `bundled-modules.json`에는 선언돼 있지 않고, **선언하지 않는 것이 맞다** — modules 쪽이 2026-10-06 Q-1로 "이 저장소 릴리스로 나가고 코어에는 동봉하지 않는다"를 확정했다(`lab.stellaxia.*` 유지, 개명 없음). 그 결과 **설치기가 이 모듈을 깔지 않으면 새 노드는 `MAIN_NOT_FOUND`로 시작한다** — 설치기가 챙겨야 하는 일이다(Q-10) |
+| Q-10 | 동봉하지 않는 필수 모듈(node-gui)을 카탈로그에 어떻게 싣나 | `bundled-modules.json`(코어가 동봉할 것)과 별개의 **원격 전달 선언**을 Terra에 둔다(예: `installer-modules.json` — `{id, roles, required, source: modules@<tag>}`). 빌드가 modules의 `modules.json`에서 해시를 풀어 카탈로그 `modules[]`에 `origin: modules-release`로 새긴다. node-gui는 `required: true`. 설치기 S3는 이 모듈이 받아지지 않으면 완료 화면에서 "첫 화면이 비어 있다"고 알린다 |
 | Q-8 | modules 릴리스가 이미 내는 `modules.json`(schemaVersion 1: 모듈별·타깃별 자산 이름과 sha256)을 카탈로그 `modules[]`의 원천으로 쓰나 | 쓴다. 빌드가 이 파일을 읽어 URL을 붙이고 `required`·`roles`를 `bundled-modules.json`에서 얻어 v3에 새긴다. 해시를 새로 계산하지 않는다 |
 | Q-9 | modules의 `.tmod` 서명(`pack --sign-key`)을 언제 켜나 | modules `release.yml`은 "검증하는 쪽에 신뢰 앵커가 없는 동안의 서명은 장식"이라며 미뤄 뒀다(Q-13). 이 설계의 루트 키가 그 앵커가 될 수 있다. 1단계는 카탈로그 sha256으로 덮고, 2단계에서 모듈 서명을 같은 루트 아래에 둔다 |
 | Q-2 | 서명 방식 | Ed25519 분리 서명(minisign 호환). 의존이 가볍고 설치기에 넣기 쉽다 |
