@@ -59,6 +59,7 @@ https://github.com/StellaxiaLab/terra-releases/releases/latest/download/release-
 ## 문서
 
 - [설치기 재설계 — 원격 취득 부트스트랩과 로컬 웹 UI](docs/installer-design.md) — 구조, 카탈로그 스키마 초안, 보안 작업 목록, 열린 결정
+- [설치기 구현 현황](docs/installer-status.md) — 구현한 것, 확인한 환경, 알려진 한계, 다음 단계(확인한 것과 못 한 것을 나눠 적음)
 - [설치기 GUI 디자인 브리프](docs/installer-gui-design-brief.md) — GUI 디자인 인계 문서(화면 흐름, 명세, 시각 규칙)
 
 두 문서는 Terra 저장소의 `docs/architecture/operations/` 가 정본이다. 이 저장소의 사본은 공개용으로 내부 문서 링크만 걷어 낸 것이며, 어긋나면 정본이 맞다.
