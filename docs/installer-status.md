@@ -1,11 +1,11 @@
 # 설치기 구현 현황
 
-기준일: 2026-10-12 · 최신 게시: `v0.6.2` (prerelease)
+기준일: 2026-10-17 · 최신 게시: `v0.6.5` (prerelease)
 
 이 문서는 설치기(`terra-setup`)가 어디까지 구현되었고, 무엇을 어떤 환경에서 확인했고, 무엇이 남았는지를 적는다. 설계는 [installer-design.md](installer-design.md)에 있다. 이 문서는 **확인한 것과 확인하지 못한 것을 나누어 적는 것**을 원칙으로 한다.
 
 > [!NOTE] 아직 정식 릴리스가 아니다
-> 게시된 `v0.6.0` ~ `v0.6.2`는 모두 **prerelease**다. 설치기의 기본 카탈로그 주소(`releases/latest/download/…`)는 아직 아무 곳도 가리키지 않는다. 시험하려면 카탈로그 주소를 직접 준다(아래 "써 보려면").
+> 게시된 `v0.6.0` ~ `v0.6.5`는 모두 **prerelease**다. 설치기의 기본 카탈로그 주소(`releases/latest/download/…`)는 아직 아무 곳도 가리키지 않는다. 시험하려면 카탈로그 주소를 직접 준다(아래 "써 보려면").
 
 ## 한눈에 보기
 
@@ -62,7 +62,6 @@
 
 - **Windows 코드 서명이 없다.** 처음 실행하면 SmartScreen 경고가 뜰 수 있다. 서명 확인은 `.sha256`과 카탈로그 서명으로 한다. 정식 배포 전에 정해야 한다.
 - **정식 게시 전이다.** 기본 주소가 비어 있으므로 `--catalog` 없이 실행하면 카탈로그를 찾지 못한다.
-- **명령줄 `setup modify`는 `--role`을 생략하면 설치된 역할을 유지하지 않고 기본값(leaf+tree)을 적용한다.** 기능 플래그 하나만 바꾸려 해도 Tree가 설치될 수 있다. 명령줄로 `modify`할 때는 **항상 `--role`을 명시**한다. 화면은 역할을 항상 보내므로 영향이 없다. 수정 예정이다.
 - **엔진의 `modify`는 구성 요소·모듈 범위·SSH 서버·Fleet 호스트만 바꾼다.** PATH, 자동 시작, WireGuard 모드는 설치할 때 정한다. 바꿔 달라는 요청은 "이미 같다"로 건너뛴다.
 - 받는 동안 진행률이 한 자리에 머물러 보인다(코어 수백 MB). 바이트 단위 진행률은 아직 없다.
 - 관리자 승인창을 3분 안에 누르지 않으면 "관리자 권한이 승인되지 않았어요"로 끝난다. 이 동작은 의도된 것이다.
@@ -82,7 +81,7 @@
 1. [Releases](https://github.com/StellaxiaLab/terra-releases/releases)에서 자기 플랫폼의 `terra-setup-<타깃>`과 `.sha256`을 받아 해시를 확인한다.
 2. 카탈로그 주소를 직접 주고 화면을 연다.
    ```text
-   terra-setup ui --catalog https://github.com/StellaxiaLab/terra-releases/releases/download/v0.6.2/release-index.json
+   terra-setup ui --catalog https://github.com/StellaxiaLab/terra-releases/releases/download/v0.6.5/release-index.json
    ```
 3. 서명만 확인하려면:
    ```text
@@ -91,10 +90,9 @@
 
 ## 다음 단계
 
-1. 명령줄 `modify`가 역할을 보존하도록 고친다.
-2. 실제 Linux 기기(x86_64, arm64)에서 신규 설치와 승격 경로를 시험한다.
-3. 깨끗한 기계에서 신규 설치·제거를 시험한다.
-4. 정식 게시(prerelease 해제)와 기본 카탈로그 주소 활성화.
-5. Windows 코드 서명.
+1. 실제 Linux 기기(x86_64, arm64)에서 신규 설치와 승격 경로를 시험한다.
+2. 깨끗한 기계에서 신규 설치·제거를 시험한다.
+3. 정식 게시(prerelease 해제)와 기본 카탈로그 주소 활성화.
+4. Windows 코드 서명.
 
 이 문서의 정본은 Terra 저장소의 `docs/architecture/operations/installer-implementation-plan.md`이며, 이 사본은 공개용으로 요약한 것이다. 어긋나면 정본이 맞다.
