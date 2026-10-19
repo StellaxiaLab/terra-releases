@@ -1,11 +1,11 @@
 # 설치기 구현 현황
 
-기준일: 2026-10-17 · 최신 게시: `v0.6.5` (prerelease)
+기준일: 2026-10-19 · 최신 게시: `v0.6.6`
 
 이 문서는 설치기(`terra-setup`)가 어디까지 구현되었고, 무엇을 어떤 환경에서 확인했고, 무엇이 남았는지를 적는다. 설계는 [installer-design.md](installer-design.md)에 있다. 이 문서는 **확인한 것과 확인하지 못한 것을 나누어 적는 것**을 원칙으로 한다.
 
-> [!NOTE] 아직 정식 릴리스가 아니다
-> 게시된 `v0.6.0` ~ `v0.6.5`는 모두 **prerelease**다. 설치기의 기본 카탈로그 주소(`releases/latest/download/…`)는 아직 아무 곳도 가리키지 않는다. 시험하려면 카탈로그 주소를 직접 준다(아래 "써 보려면").
+> [!NOTE] 아직 시험 단계다
+> `v0.6.5`부터 최신(Latest)으로 게시돼, 설치기의 기본 카탈로그 주소(`releases/latest/download/…`)가 열린다. 그래도 깨끗한 기계의 신규 설치, 실제 Linux 기기, Linux arm64는 아직 확인하지 못했고 Windows 코드 서명도 없다(아래 "아직 확인하지 못한 것").
 
 ## 한눈에 보기
 
@@ -61,7 +61,6 @@
 ## 알려진 한계와 문제
 
 - **Windows 코드 서명이 없다.** 처음 실행하면 SmartScreen 경고가 뜰 수 있다. 서명 확인은 `.sha256`과 카탈로그 서명으로 한다. 정식 배포 전에 정해야 한다.
-- **정식 게시 전이다.** 기본 주소가 비어 있으므로 `--catalog` 없이 실행하면 카탈로그를 찾지 못한다.
 - **엔진의 `modify`는 구성 요소·모듈 범위·SSH 서버·Fleet 호스트만 바꾼다.** PATH, 자동 시작, WireGuard 모드는 설치할 때 정한다. 바꿔 달라는 요청은 "이미 같다"로 건너뛴다.
 - 받는 동안 진행률이 한 자리에 머물러 보인다(코어 수백 MB). 바이트 단위 진행률은 아직 없다.
 - 관리자 승인창을 3분 안에 누르지 않으면 "관리자 권한이 승인되지 않았어요"로 끝난다. 이 동작은 의도된 것이다.
@@ -76,12 +75,12 @@
 
 ## 써 보려면
 
-게시된 prerelease를 시험하는 방법이다. 이 PC의 설치를 바꾸므로 시험용 기계에서 하기를 권한다.
+시험하는 방법이다. 이 PC의 설치를 바꾸므로 시험용 기계에서 하기를 권한다. 기본 주소가 열려 있으므로 설치기를 인자 없이 실행해도(더블클릭) 화면이 열리고 카탈로그를 스스로 찾는다. 0.6.6부터 화면은 브라우저 탭이 아니라 주소창 없는 전용 창으로 열린다(Edge·Chrome이 있을 때).
 
 1. [Releases](https://github.com/StellaxiaLab/terra-releases/releases)에서 자기 플랫폼의 `terra-setup-<타깃>`과 `.sha256`을 받아 해시를 확인한다.
-2. 카탈로그 주소를 직접 주고 화면을 연다.
+2. 특정 버전의 카탈로그 주소를 직접 주고 화면을 열 수도 있다.
    ```text
-   terra-setup ui --catalog https://github.com/StellaxiaLab/terra-releases/releases/download/v0.6.5/release-index.json
+   terra-setup ui --catalog https://github.com/StellaxiaLab/terra-releases/releases/download/v0.6.6/release-index.json
    ```
 3. 서명만 확인하려면:
    ```text
@@ -92,7 +91,6 @@
 
 1. 실제 Linux 기기(x86_64, arm64)에서 신규 설치와 승격 경로를 시험한다.
 2. 깨끗한 기계에서 신규 설치·제거를 시험한다.
-3. 정식 게시(prerelease 해제)와 기본 카탈로그 주소 활성화.
-4. Windows 코드 서명.
+3. Windows 코드 서명.
 
 이 문서의 정본은 Terra 저장소의 `docs/architecture/operations/installer-implementation-plan.md`이며, 이 사본은 공개용으로 요약한 것이다. 어긋나면 정본이 맞다.
